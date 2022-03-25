@@ -1,18 +1,25 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: ultimate-pc
+ * Category: ultimate-pc
  * Date: 2022/03/19
  * Time: 09:11 م
  */
-include('../db_connect.php');
+
+
+include(__DIR__ . '/../../db_connect.php');
+
 
 class User
 {
 
-
     static function getByUserNameAndPassword($username , $password){
-
+        global $con;
+        $query = "SELECT *  FROM users where user_name = ? AND password = ?"; // db query
+        $statement = $con->prepare($query);  // prepare query
+        $statement->execute([$username , $password]);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        return $user;
     }
 
 
@@ -22,8 +29,8 @@ class User
         global $con;
 
         $statement = $con->prepare("
-   INSERT INTO users (name, email,user_name,password,privilege_id) 
-   VALUES (:name, :email, :user_name,:password,:privilege_id )");
+   INSERT INTO users (name, email,user_name,password) 
+   VALUES (:name, :email, :user_name,:password )");
         $result = $statement->execute(
             array(
                 ':name'            => $name,
@@ -59,13 +66,17 @@ class User
                        WHERE id = :user_id");
 
         $result = $statement->execute($params);
-
-
+        return $result;
     }
 
 
     static function get($id){
-
+        global $con;
+        $query = "SELECT *  FROM users where id = ?"; // db query
+        $statement = $con->prepare($query);  // prepare query
+        $statement->execute([$id]);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        return $user;
     }
 
     static function listUsers(){

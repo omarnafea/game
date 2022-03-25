@@ -2,7 +2,7 @@
 
 session_start();
 
-include "../db_connect.php";
+include "../users/classes/User.php";
 
 $username=$_POST['username'];
 $password=sha1($_POST['password']);//encrypt password using sha1
@@ -10,18 +10,11 @@ $response = [
     "success"=>true
 ];
 
-$query = "SELECT
-      id, user_name,password,privilege_id
-     FROM users WHERE user_name = ? AND password = ? 
-       AND is_active=1 LIMIT 1 ";
+    $user = User::getByUserNameAndPassword($username , $password);
 
-    $stmt=$con->prepare($query);
-    $stmt->execute(array($username,$password));
-    $user_row=$stmt->fetch();
-    $count=$stmt->rowCount();
-    if($count>0){
+    if($user){
         $_SESSION['username']=$username;      // Register Session Name
-        $_SESSION['user_id']=$user_row['id'];  // Register Session ID
+        $_SESSION['user_id']=$user['id'];  // Register Session ID
     }
     else{
         $response['success'] = false;

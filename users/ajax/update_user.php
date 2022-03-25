@@ -1,6 +1,6 @@
 <?php
 
-include('../User.php');
+include('../classes/User.php');
 
 if(trim($_POST['password'])  !== ""){
 
@@ -9,8 +9,8 @@ if(trim($_POST['password'])  !== ""){
     }
 }
 
-User::update($_POST["user_id"] , $_POST["name"], $_POST["email"] , $_POST["user_name"] , trim($_POST['password']));
+Category::update($_POST["user_id"] , $_POST["name"], $_POST["email"] , $_POST["user_name"] , trim($_POST['password']));
 
-die(json_encode(['success' => true , 'message'=>'User data updated successfully'] ));
+die(json_encode(['success' => true , 'message'=>'Category data updated successfully'] ));
 
 ?>

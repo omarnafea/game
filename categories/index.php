@@ -1,10 +1,7 @@
 <?php
-include('../db_connect.php');
+include './classes/Category.php';
 
-$query = "SELECT * FROM categories"; // db query
-$statement = $con->prepare($query);  // prepare query
-$statement->execute();
-$categories = $statement->fetchAll(PDO::FETCH_ASSOC);
+$categories = Category::listCategories();
 
 /*
 echo "<pre>";
@@ -34,7 +31,8 @@ die;
     <table id="categories_table" class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th scope="col">Name</th>
+            <th scope="col">Name EN</th>
+            <th scope="col">Name AR</th>
             <th scope="col">Edit</th>
         </tr>
         </thead>
@@ -43,7 +41,8 @@ die;
           foreach($categories as $category)
           { ?>
                <tr>
-               <td><?=$category['category_name']?></td>
+               <td><?=$category['name_en']?></td>
+               <td><?=$category['name_ar']?></td>
                <td>
                    <a href="add_category.php?category_id=<?=$category['category_id']?>"  class="btn btn-primary">Edit</a>
                </td>

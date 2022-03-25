@@ -7,8 +7,7 @@ $user_name = "";
 $email = "";
 $prev_id = -1;
 $user_id  = -1;
-
-
+include './classes/User.php';
 
 
 if(isset($_GET['user_id'])){
@@ -17,9 +16,7 @@ if(isset($_GET['user_id'])){
 
     $update_mode = true;
 
-    $statement = $con->prepare("select * from users WHERE id = ?");  // prepare query
-    $statement->execute([$_GET['user_id']]);
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    $user = Category::get($user_id);
 /*
     echo '<pre>';
     print_r($user);
@@ -30,8 +27,6 @@ if(isset($_GET['user_id'])){
     $name = $user['name'];
     $user_name = $user['user_name'];
     $email = $user['email'];
-    $prev_id = $user['privilege_id'];
-
 }
 
 ?>
@@ -51,7 +46,7 @@ if(isset($_GET['user_id'])){
     include "../include/dashboard.php";
     ?>
     <div class="main-form">
-        <h2 class="text-primary text-center mt-3"><?=$update_mode ? "Update user" : "Add New User"?></h2>
+        <h2 class="text-primary text-center mt-3"><?=$update_mode ? "Update user" : "Add New Category"?></h2>
 
         <form method="post" id="user_add_form" enctype="multipart/form-data">
           

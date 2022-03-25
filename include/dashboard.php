@@ -15,6 +15,10 @@
                  <a class="stretched-link text-decoration-none" href="../games"> <i class="fas fa-tag"></i>  Games</a>
               </li>
 
+               <li class="list-group-item pagelink">
+                 <a class="stretched-link text-decoration-none" href="../categories"> <i class="fas fa-tag"></i>  Categories</a>
+              </li>
+
     </ul>
 </div>
 

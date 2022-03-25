@@ -28,9 +28,11 @@ include "auth.php";
                         <a class="nav-link" href="../users">USERS</a>
                     </li>
 
-
                 <li class="nav-item">
                     <a class="nav-link" href="../games">GAMES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../categories">CATEGORIES</a>
                 </li>
 
 

@@ -1,7 +1,9 @@
 <?php
-include ('./User.php');
 
-$users = User::listUsers();
+
+include('./classes/User.php');
+
+$users = Category::listUsers();
 ?>
 <html>
 <head>

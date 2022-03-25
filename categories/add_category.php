@@ -1,7 +1,8 @@
 <?php
 $category_id = -1;
-$name = "";
-
+$name_en = "";
+$name_ar = "";
+include "./classes/Category.php";
 $update_mode = false; //add category (not Update)
 
 include '../db_connect.php';
@@ -9,11 +10,10 @@ if(isset($_GET['category_id'])){
 $update_mode = true;
 $category_id = $_GET['category_id'];
 
-$statement = $con->prepare("select * from categories where category_id = ? ");  // prepare query
-$statement->execute([$category_id]);
-$category = $statement->fetch(PDO::FETCH_ASSOC);
+$category = Category::get($category_id);
 
-$name = $category["category_name"];
+$name_en = $category["name_en"];
+$name_ar = $category["name_ar"];
 
 /*
 echo '<pre>';
@@ -57,8 +57,13 @@ echo '</pre>';die;
         <form id="add_category_form">
              
         <div class="form-group">
-            <label>Name</label>
-            <input  type="text" value="<?=$name?>" class="form-control" name="category_name" id="name" placeholder="Enter category name" required >
+            <label>Name EN</label>
+            <input  type="text" value="<?=$name_en?>" class="form-control" name="name_en" id="name_en" placeholder="Enter category name in english" required >
+        </div>
+
+        <div class="form-group">
+            <label>Name AR</label>
+            <input  type="text" value="<?=$name_ar?>" class="form-control" name="name_ar" id="name_ar" placeholder="Enter category name in arabic" required >
         </div>
 
         

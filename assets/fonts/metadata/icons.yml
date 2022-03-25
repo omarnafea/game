@@ -19388,7 +19388,7 @@ user:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User
+  label: Category
   search:
     terms:
       - account
@@ -19408,7 +19408,7 @@ user-alt:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Alternate User
+  label: Alternate Category
   search:
     terms:
       - account
@@ -19425,7 +19425,7 @@ user-alt:
 user-alt-slash:
   changes:
     - 5.0.11
-  label: Alternate User Slash
+  label: Alternate Category Slash
   search:
     terms:
       - account
@@ -19442,7 +19442,7 @@ user-alt-slash:
 user-astronaut:
   changes:
     - 5.0.11
-  label: User Astronaut
+  label: Category Astronaut
   search:
     terms:
       - avatar
@@ -19458,7 +19458,7 @@ user-astronaut:
 user-check:
   changes:
     - 5.0.11
-  label: User Check
+  label: Category Check
   search:
     terms:
       - accept
@@ -19477,7 +19477,7 @@ user-circle:
     - 5.0.11
     - 5.11.0
     - 5.11.1
-  label: User Circle
+  label: Category Circle
   search:
     terms:
       - account
@@ -19495,7 +19495,7 @@ user-circle:
 user-clock:
   changes:
     - 5.0.11
-  label: User Clock
+  label: Category Clock
   search:
     terms:
       - alert
@@ -19509,7 +19509,7 @@ user-clock:
 user-cog:
   changes:
     - 5.0.11
-  label: User Cog
+  label: Category Cog
   search:
     terms:
       - admin
@@ -19523,7 +19523,7 @@ user-cog:
 user-edit:
   changes:
     - 5.0.11
-  label: User Edit
+  label: Category Edit
   search:
     terms:
       - edit
@@ -19539,7 +19539,7 @@ user-edit:
 user-friends:
   changes:
     - 5.0.11
-  label: User Friends
+  label: Category Friends
   search:
     terms:
       - group
@@ -19554,7 +19554,7 @@ user-friends:
 user-graduate:
   changes:
     - 5.0.11
-  label: User Graduate
+  label: Category Graduate
   search:
     terms:
       - cap
@@ -19571,7 +19571,7 @@ user-graduate:
 user-injured:
   changes:
     - 5.4.0
-  label: User Injured
+  label: Category Injured
   search:
     terms:
       - cast
@@ -19588,7 +19588,7 @@ user-lock:
   changes:
     - 5.0.11
     - 5.9.0
-  label: User Lock
+  label: Category Lock
   search:
     terms:
       - admin
@@ -19624,7 +19624,7 @@ user-md:
 user-minus:
   changes:
     - 5.0.11
-  label: User Minus
+  label: Category Minus
   search:
     terms:
       - delete
@@ -19637,7 +19637,7 @@ user-minus:
 user-ninja:
   changes:
     - 5.0.11
-  label: User Ninja
+  label: Category Ninja
   search:
     terms:
       - assassin
@@ -19670,7 +19670,7 @@ user-plus:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User Plus
+  label: Category Plus
   search:
     terms:
       - add
@@ -19689,7 +19689,7 @@ user-secret:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User Secret
+  label: Category Secret
   search:
     terms:
       - clothing
@@ -19707,7 +19707,7 @@ user-secret:
 user-shield:
   changes:
     - 5.0.11
-  label: User Shield
+  label: Category Shield
   search:
     terms:
       - admin
@@ -19722,7 +19722,7 @@ user-shield:
 user-slash:
   changes:
     - 5.0.11
-  label: User Slash
+  label: Category Slash
   search:
     terms:
       - ban
@@ -19735,7 +19735,7 @@ user-slash:
 user-tag:
   changes:
     - 5.0.11
-  label: User Tag
+  label: Category Tag
   search:
     terms:
       - avatar
@@ -19751,7 +19751,7 @@ user-tag:
 user-tie:
   changes:
     - 5.0.11
-  label: User Tie
+  label: Category Tie
   search:
     terms:
       - avatar
@@ -19770,7 +19770,7 @@ user-times:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Remove User
+  label: Remove Category
   search:
     terms:
       - archive
