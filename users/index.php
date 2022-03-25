@@ -3,7 +3,7 @@
 
 include('./classes/User.php');
 
-$users = Category::listUsers();
+$users = User::listUsers();
 ?>
 <html>
 <head>
