@@ -1,2 +1,2 @@
 <?php
-header("location:customer_site/index.php");
+header("location:games_interface/index.php");

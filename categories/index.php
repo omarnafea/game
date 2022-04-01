@@ -1,7 +1,7 @@
 <?php
 include './classes/Category.php';
 
-$categories = Category::listCategories();
+$categories = Game::listCategories();
 
 /*
 echo "<pre>";

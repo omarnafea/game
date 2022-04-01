@@ -16,7 +16,7 @@ if(isset($_GET['user_id'])){
 
     $update_mode = true;
 
-    $user = Category::get($user_id);
+    $user = Game::get($user_id);
 /*
     echo '<pre>';
     print_r($user);
@@ -46,7 +46,7 @@ if(isset($_GET['user_id'])){
     include "../include/dashboard.php";
     ?>
     <div class="main-form">
-        <h2 class="text-primary text-center mt-3"><?=$update_mode ? "Update user" : "Add New Category"?></h2>
+        <h2 class="text-primary text-center mt-3"><?=$update_mode ? "Update user" : "Add New Game"?></h2>
 
         <form method="post" id="user_add_form" enctype="multipart/form-data">
           

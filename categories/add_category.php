@@ -10,7 +10,7 @@ if(isset($_GET['category_id'])){
 $update_mode = true;
 $category_id = $_GET['category_id'];
 
-$category = Category::get($category_id);
+$category = Game::get($category_id);
 
 $name_en = $category["name_en"];
 $name_ar = $category["name_ar"];

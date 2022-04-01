@@ -19388,7 +19388,7 @@ user:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Category
+  label: Game
   search:
     terms:
       - account
@@ -19408,7 +19408,7 @@ user-alt:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Alternate Category
+  label: Alternate Game
   search:
     terms:
       - account
@@ -19425,7 +19425,7 @@ user-alt:
 user-alt-slash:
   changes:
     - 5.0.11
-  label: Alternate Category Slash
+  label: Alternate Game Slash
   search:
     terms:
       - account
@@ -19442,7 +19442,7 @@ user-alt-slash:
 user-astronaut:
   changes:
     - 5.0.11
-  label: Category Astronaut
+  label: Game Astronaut
   search:
     terms:
       - avatar
@@ -19458,7 +19458,7 @@ user-astronaut:
 user-check:
   changes:
     - 5.0.11
-  label: Category Check
+  label: Game Check
   search:
     terms:
       - accept
@@ -19477,7 +19477,7 @@ user-circle:
     - 5.0.11
     - 5.11.0
     - 5.11.1
-  label: Category Circle
+  label: Game Circle
   search:
     terms:
       - account
@@ -19495,7 +19495,7 @@ user-circle:
 user-clock:
   changes:
     - 5.0.11
-  label: Category Clock
+  label: Game Clock
   search:
     terms:
       - alert
@@ -19509,7 +19509,7 @@ user-clock:
 user-cog:
   changes:
     - 5.0.11
-  label: Category Cog
+  label: Game Cog
   search:
     terms:
       - admin
@@ -19523,7 +19523,7 @@ user-cog:
 user-edit:
   changes:
     - 5.0.11
-  label: Category Edit
+  label: Game Edit
   search:
     terms:
       - edit
@@ -19539,7 +19539,7 @@ user-edit:
 user-friends:
   changes:
     - 5.0.11
-  label: Category Friends
+  label: Game Friends
   search:
     terms:
       - group
@@ -19554,7 +19554,7 @@ user-friends:
 user-graduate:
   changes:
     - 5.0.11
-  label: Category Graduate
+  label: Game Graduate
   search:
     terms:
       - cap
@@ -19571,7 +19571,7 @@ user-graduate:
 user-injured:
   changes:
     - 5.4.0
-  label: Category Injured
+  label: Game Injured
   search:
     terms:
       - cast
@@ -19588,7 +19588,7 @@ user-lock:
   changes:
     - 5.0.11
     - 5.9.0
-  label: Category Lock
+  label: Game Lock
   search:
     terms:
       - admin
@@ -19624,7 +19624,7 @@ user-md:
 user-minus:
   changes:
     - 5.0.11
-  label: Category Minus
+  label: Game Minus
   search:
     terms:
       - delete
@@ -19637,7 +19637,7 @@ user-minus:
 user-ninja:
   changes:
     - 5.0.11
-  label: Category Ninja
+  label: Game Ninja
   search:
     terms:
       - assassin
@@ -19670,7 +19670,7 @@ user-plus:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Category Plus
+  label: Game Plus
   search:
     terms:
       - add
@@ -19689,7 +19689,7 @@ user-secret:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Category Secret
+  label: Game Secret
   search:
     terms:
       - clothing
@@ -19707,7 +19707,7 @@ user-secret:
 user-shield:
   changes:
     - 5.0.11
-  label: Category Shield
+  label: Game Shield
   search:
     terms:
       - admin
@@ -19722,7 +19722,7 @@ user-shield:
 user-slash:
   changes:
     - 5.0.11
-  label: Category Slash
+  label: Game Slash
   search:
     terms:
       - ban
@@ -19735,7 +19735,7 @@ user-slash:
 user-tag:
   changes:
     - 5.0.11
-  label: Category Tag
+  label: Game Tag
   search:
     terms:
       - avatar
@@ -19751,7 +19751,7 @@ user-tag:
 user-tie:
   changes:
     - 5.0.11
-  label: Category Tie
+  label: Game Tie
   search:
     terms:
       - avatar
@@ -19770,7 +19770,7 @@ user-times:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Remove Category
+  label: Remove Game
   search:
     terms:
       - archive

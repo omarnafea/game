@@ -15,7 +15,7 @@ $(document).on('submit', '#user_add_form', function(event){
         return false;
     }
 
-    let ajax_url = "ajax/add_user.php";
+    let ajax_url = "ajax/index.php";
 
    console.log('user id  : ' , $("#user_id").val());
 
