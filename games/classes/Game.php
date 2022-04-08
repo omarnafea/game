@@ -13,26 +13,27 @@ include(__DIR__ . '/../../db_connect.php');
 class Game
 {
 
-    static function create($user_id , $type , $name_en , $name_ar , $category_id ){
+    static function create($user_id , $type , $name_en , $name_ar , $category_id  , $image ){
 
 
         global $con;
 
         $statement = $con->prepare("
-                    INSERT INTO games (user_id , type , name_en , name_ar , category_id)  
-                                       VALUES (:user_id , :type , :name_en , :name_ar , :category_id )");
+                    INSERT INTO games (user_id , type , name_en , name_ar , category_id , image)  
+                                       VALUES (:user_id , :type , :name_en , :name_ar , :category_id , :image)");
         $result = $statement->execute(
             array(
                 ':user_id'         => $user_id,
                 ':type'            => $type,
                 ':name_en'         => $name_en,
                 ':name_ar'         => $name_ar,
-                ':category_id'     => $category_id
+                ':category_id'     => $category_id,
+                ':image'           => $image
             )
         );
     }
 
-    static function update( $id ,$name_en , $name_ar ,$type  , $category_id){
+    static function update( $id ,$name_en , $name_ar ,$type  , $category_id , $image  = null){
 
         global $con;
         $params =    array(
@@ -43,9 +44,17 @@ class Game
             ':type'                  => $type
         );
 
+        $updateImageSQL  ='';
+
+        if(isset($image)){
+            $updateImageSQL = " ,image = :image";
+            $params[":image"] = $image;
+        }
+
         $statement = $con->prepare(
             "UPDATE games 
-                      SET name_en = :name_en,name_ar = :name_ar ,type = :type , category_id = :category_id");
+                      SET name_en = :name_en,name_ar = :name_ar ,type = :type , category_id = :category_id {$updateImageSQL} 
+                       WHERE id = :id");
         $result = $statement->execute($params);
         return $result;
     }
@@ -71,7 +80,7 @@ class Game
             $where = " WHERE user_id = ?";
         }
 
-        $query = "SELECT * , categories.name_en as category_en , categories.name_ar as categories_ar  
+        $query = "SELECT games.* , categories.name_en as category_en , categories.name_ar as category_ar  
 
                   FROM games 
                   JOIN categories on categories.category_id = games.category_id

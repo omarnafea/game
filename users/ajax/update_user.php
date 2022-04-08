@@ -9,7 +9,7 @@ if(trim($_POST['password'])  !== ""){
     }
 }
 
-Game::update($_POST["user_id"] , $_POST["name"], $_POST["email"] , $_POST["user_name"] , trim($_POST['password']));
+User::update($_POST["user_id"] , $_POST["name"], $_POST["email"] , $_POST["user_name"] , trim($_POST['password']));
 
 die(json_encode(['success' => true , 'message'=>'Game data updated successfully'] ));
 

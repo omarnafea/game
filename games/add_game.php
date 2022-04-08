@@ -1,6 +1,7 @@
 <?php
 $game_id = -1;
 $category_id = -1;
+$type = "";
 $name_en = "";
 $name_ar = "";
 include "./classes/Game.php";
@@ -22,12 +23,8 @@ $stages = Stage::listStages($game_id);
 
 $name_en = $game["name_en"];
 $name_ar = $game["name_ar"];
-
-/*
-echo '<pre>';
-print_r($category);
-echo '</pre>';die;
-*/
+$category_id = $game['category_id'];
+$type = $game['type'];
 
 
 }
@@ -99,16 +96,20 @@ echo '</pre>';die;
                     <option value="-1">Select Type</option>
                     <?php
                     foreach($types as $type_key => $type_name){
-                        $selected = "";
-
+                        $selected = $type_key == $type ? "selected" : '';
                         ?>
                         <option value="<?=$type_key?>" <?=$selected?>><?=$type_name?></option>
-
                     <?php }?>
                 </select>
             </div>
 
-        
+            <div class="form-group">
+                <label>Image</label>
+                <input  type="file"  class="form-control" name="image" id="image"   accept=".jpg , .png , .jpeg"
+                    <?php if(!$update_mode) echo 'required' ?>>
+
+            </div>
+
         <div class="text-center">
             <input type="submit" class="btn btn-primary submit-btn" value="Save">
         </div>

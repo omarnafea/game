@@ -8,17 +8,16 @@ if(!isset($_SESSION)){
 
 $games = Game::listGames($_SESSION['user_id']);
 
-/*
-echo "<pre>";
-print_r($game);
-echo "</pre>";
-die;
-*/
+//echo "<pre>";
+//print_r($games);
+//echo "</pre>";
+//die;
+
 
 ?>
 <html>
 <head>
-    <title>categories</title>
+    <title>Games</title>
     <meta charset="utf-8"/>
     <?php include "../include/header.php";?>
     <link rel="stylesheet" href="games.css">

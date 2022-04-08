@@ -37,7 +37,13 @@ function renderNextStage(){
 
     $("#progress").html(stageIndex+ 1 + '/' + stages.length);
     if(stageIndex === stages.length){
-        alert('game finished');
+        Swal.fire({
+            icon: 'success',
+            title: 'Game finished',
+            text:  ' '
+        }).then(function () {
+            window.location.href = "../index.php";
+        });
         return;
     }
 
@@ -64,11 +70,7 @@ function renderNextStage(){
         }
     });
 
-
     $("#content").html(currentStage.content);
-
-
-
 }
 
 

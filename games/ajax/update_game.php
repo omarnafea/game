@@ -1,9 +1,16 @@
 <?php
 
 include "../classes/Game.php";
+include "../../upload/classes/Upload.php";
 
 
-Game::update($_POST['category_id'] , $_POST['name_en'] , $_POST['name_ar']);
+$image = null;
+if(!empty( $_FILES['image']['name'])){
+    $image = Upload::uploadImage($_FILES['image'])['image'];
+}
+
+
+Game::update($_POST['game_id'] , $_POST['name_en'] , $_POST['name_ar'] , $_POST['type'] , $_POST['category_id'] , $image);
 
 die(json_encode(['success'=>true , 'message'=>'category data updated successfully']));
 

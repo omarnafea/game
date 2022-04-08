@@ -32,14 +32,17 @@ $games = Game::listGames();
             foreach($games as $game)
             { ?>
 
-
-                <div class="game-cart col-md-4">
-
-                    <h4> <?=$game['name_en']?></h4>
-                    <p> <?=$game['name_ar']?></p>
-                    <p> <?=$game['category_en']?></p>
-
-                    <a href="<?=getGameLink($game)?>" class="btn btn-primary">Start</a>
+                <div class="game-cart col-md-4 mt-2 ">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="<?=$game['image']?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"> <?=$game['name_ar']?></h5>
+                            <p class="card-text"><?=$game['category_en']?></p>
+                        </div>
+                        <div class="card-body my-0">
+                            <a href="<?=getGameLink($game)?>" class="btn btn-primary">Start</a>
+                        </div>
+                    </div>
                 </div>
             <?php }?>
 
