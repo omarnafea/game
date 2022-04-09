@@ -130,7 +130,6 @@ $type = $game['type'];
 
 
         <div id="stages">
-
             <?php
               printStages($stages);
             ?>

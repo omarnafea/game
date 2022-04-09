@@ -60,6 +60,9 @@ $games = Game::listGames();
      foreach ($gameTypes as $type => $name){
          if($gameTypes[$game['type']] == "QUESTIONS"){
              return "start_game/questions_game.php?game_id={$game['id']}";
+         }else {
+             return "start_game/pick_image_game.php?game_id={$game['id']}";
+
          }
      }
  }

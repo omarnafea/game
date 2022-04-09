@@ -1,5 +1,3 @@
-$("#categories_table").dataTable();
-
 
 function deleteRow(element){
     $(element).parent().parent().remove();
@@ -94,9 +92,21 @@ $(document).on('change', '.correct-option', function() {
 $("#add_stage").click(function () {
 
     const stage = `<div class="row  stages-row">
+             <div class="col-md-3">
+                <div class="form-group">
+                    <label>Content Type</label>
+                     <select class="stage-content-type form-control" name="stage_content_type">
+                        <option value="-1">Select Content Type</option>
+                        <option value="STRING">Text</option>
+                        <option value="IMAGE">Image</option>
+                        <option value="VOICE">Voice</option>
+                    </select>
+                </div>
+            </div> 
+            
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>content</label>
+                    <label>Content</label>
                     <input type="text" class="form-control content" value="">
                 </div>
             </div> 
@@ -149,42 +159,4 @@ $("#add_stage").click(function () {
 
         </div>`;
     $('#stages').append(stage);
-});
-$(document).on('submit', '#add_game_form', function(event){
-    event.preventDefault();
-
-   
-    let ajax_url = "ajax/add_game.php";
-
-    if($("#game_id").val() !== '-1'){
-        ajax_url = "ajax/update_game.php"
-    }
-
-    $.ajax({
-        url:ajax_url,
-        method:'POST',
-        data: new FormData(this),
-        contentType:false,
-        processData:false,
-        dataType : "json",
-        success:function(data)
-        {
-           if(data.success){
-               Swal.fire({
-                   icon: 'success',
-                   title: '',
-                   text: data.message
-               }).then(function () {
-                   window.location.href = "index.php";
-               });
-           }else{
-            Swal.fire({
-                icon: 'warning',
-                title: '',
-                text: data.message
-            })
-           }
-        }
-    });
-
 });

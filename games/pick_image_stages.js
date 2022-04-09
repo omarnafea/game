@@ -1,5 +1,3 @@
-$("#categories_table").dataTable();
-
 
 function deleteRow(element){
     $(element).parent().parent().remove();
@@ -9,8 +7,12 @@ function deleteRow(element){
 $("#save_stages").click(function () {
 
     const stages_rows = $(".stages-row");
-
     let stages_array = [];
+
+    let formData = new FormData();
+
+    formData.append('game_id', $("#game_id").val());
+
 
     for(let i  = 0  ; i < stages_rows.length; i++){
 
@@ -19,14 +21,19 @@ $("#save_stages").click(function () {
         const options = $(stages_rows[i]).find('.option');
         const content = $(stages_rows[i]).find('.content').val();
 
-        for(let i = 0 ; i < options.length ; i++){
-            if($(options[i]).siblings('input').is(":checked")){
+        formData.append('stage' + (i+1) + 'content' , content);
 
-                console.log($(options[i]).siblings('input'));
-                console.log($(options[i]));
-                correctOption = $(options[i]).siblings('input').val();
+        for(let k = 0 ; k < options.length ; k++){
+            if($(options[k]).siblings('input').is(":checked")){
+
+                formData.append('stage' + (i+1) + 'correct' , k +1);
+
+                // correctOption = $(options[k]).siblings('input').val();
             }
-            optionsContent[$(options[i]).data('name')] = $(options[i]).val();
+
+            // formData.append("file_" + i ,$(options[i]).prop('files')[0]);
+            formData.append("file[]",$(options[k]).prop('files')[0]);
+            // optionsContent[$(options[i]).data('name')] = $(options[i]).prop('files')[0];
         }
 
         stages_array.push(
@@ -40,13 +47,11 @@ $("#save_stages").click(function () {
     }
 
     $.ajax({
-        url:"ajax/save_text_stages.php",
+        url:"ajax/save_pick_image_stages.php",
         method:'POST',
-        data: {
-            stages : stages_array,
-            game_id : $("#game_id").val()
-        },
-        dataType : "json",
+        data: formData,
+        processData: false,
+        contentType: false,
         success:function(data)
         {
             if(data.success){
@@ -94,9 +99,21 @@ $(document).on('change', '.correct-option', function() {
 $("#add_stage").click(function () {
 
     const stage = `<div class="row  stages-row">
+             <div class="col-md-3">
+                <div class="form-group">
+                    <label>Content Type</label>
+                     <select class="stage-content-type form-control" name="stage_content_type">
+                        <option value="-1">Select Content Type</option>
+                        <option value="STRING">Text</option>
+                        <option value="IMAGE">Image</option>
+                        <option value="VOICE">Voice</option>
+                    </select>
+                </div>
+            </div> 
+            
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>content</label>
+                    <label>Content</label>
                     <input type="text" class="form-control content" value="">
                 </div>
             </div> 
@@ -106,7 +123,7 @@ $("#add_stage").click(function () {
                     <label>Option 1</label>
                     <div class="row">
                       <input type="checkbox" class="col-2 form-control correct-option" value="option_1">
-                      <input type="text" data-name="option_1" class="col-10 form-control option option-1" value="">
+                      <input type="file" accept=".jpg , .png , .jpeg" data-name="option_1" class="col-10 form-control option option-1">
                      </div>
                   
                 </div>
@@ -117,7 +134,7 @@ $("#add_stage").click(function () {
                     <label>Option 2</label>
                      <div class="row">
                         <input type="checkbox" class="col-2 form-control correct-option" value="option_2">
-                        <input type="text"  data-name="option_2" class="col-10 form-control option option-2" value="">
+                        <input type="file" accept=".jpg , .png , .jpeg"  data-name="option_2" class="col-10 form-control option option-2">
                      </div>                
                   </div>
             </div>
@@ -127,7 +144,7 @@ $("#add_stage").click(function () {
                     <label>Option 3</label>
                      <div class="row">
                         <input type="checkbox" class="col-2 form-control correct-option" value="option_3">
-                        <input type="text"  data-name="option_3" class="col-10 form-control option option-3" value="">
+                        <input type="file" accept=".jpg , .png , .jpeg" data-name="option_3" class="col-10 form-control option option-3">
                      </div>   
                     </div>
             </div>
@@ -137,7 +154,7 @@ $("#add_stage").click(function () {
                     <label>Option 4</label>
                     <div class="row">
                         <input type="checkbox" class="col-2 form-control correct-option" value="option_4">
-                        <input type="text"  data-name="option_4" class="col-10 form-control option option-4" value="">
+                        <input type="file" accept=".jpg , .png , .jpeg"  data-name="option_4" class="col-10 form-control option option-4">
                      </div>   
                 </div>
             </div>
@@ -149,42 +166,4 @@ $("#add_stage").click(function () {
 
         </div>`;
     $('#stages').append(stage);
-});
-$(document).on('submit', '#add_game_form', function(event){
-    event.preventDefault();
-
-   
-    let ajax_url = "ajax/add_game.php";
-
-    if($("#game_id").val() !== '-1'){
-        ajax_url = "ajax/update_game.php"
-    }
-
-    $.ajax({
-        url:ajax_url,
-        method:'POST',
-        data: new FormData(this),
-        contentType:false,
-        processData:false,
-        dataType : "json",
-        success:function(data)
-        {
-           if(data.success){
-               Swal.fire({
-                   icon: 'success',
-                   title: '',
-                   text: data.message
-               }).then(function () {
-                   window.location.href = "index.php";
-               });
-           }else{
-            Swal.fire({
-                icon: 'warning',
-                title: '',
-                text: data.message
-            })
-           }
-        }
-    });
-
 });

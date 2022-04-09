@@ -40,7 +40,7 @@ $("#save_stages").click(function () {
     }
 
     $.ajax({
-        url:"ajax/save_stages.php",
+        url:"ajax/save_text_stages.php",
         method:'POST',
         data: {
             stages : stages_array,
@@ -94,9 +94,21 @@ $(document).on('change', '.correct-option', function() {
 $("#add_stage").click(function () {
 
     const stage = `<div class="row  stages-row">
+             <div class="col-md-12">
+                <div class="form-group">
+                    <label>Content Type</label>
+                     <select class="stage-content-type form-control" name="stage_content_type">
+                        <option value="-1">Select Content Type</option>
+                        <option value="STRING">Text</option>
+                        <option value="IMAGE">Image</option>
+                        <option value="VOICE">Voice</option>
+                    </select>
+                </div>
+            </div> 
+            
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>content</label>
+                    <label>Content</label>
                     <input type="text" class="form-control content" value="">
                 </div>
             </div> 
@@ -175,8 +187,15 @@ $(document).on('submit', '#add_game_form', function(event){
                    title: '',
                    text: data.message
                }).then(function () {
-                   window.location.href = "index.php";
+
+                   const gameType = $("#type").val();
+
+                   if(gameType === "TEXT_QUESTIONS")
+                         window.location.href = "add_text_stages.php?game_id=" + data.game_id;
+                   else if (gameType === "PICK_IMAGE")
+                       window.location.href = "add_pick_image_stages.php?game_id=" + data.game_id;
                });
+
            }else{
             Swal.fire({
                 icon: 'warning',

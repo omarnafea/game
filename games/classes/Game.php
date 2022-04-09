@@ -31,6 +31,7 @@ class Game
                 ':image'           => $image
             )
         );
+        return $con->lastInsertId();
     }
 
     static function update( $id ,$name_en , $name_ar ,$type  , $category_id , $image  = null){
