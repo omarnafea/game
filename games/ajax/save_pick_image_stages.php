@@ -9,7 +9,6 @@ include "../classes/StageOptions.php";
 include "../../upload/classes/Upload.php";
 
 
-
 $stagesCount = count($_FILES['file']['name']) / 4;
 
 //var_dump($_POST);

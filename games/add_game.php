@@ -124,27 +124,6 @@ $type = $game['type'];
 
 </div>
 
-
-    <div class="stages-container">
-        <h2>Stages</h2>
-
-
-        <div id="stages">
-            <?php
-              printStages($stages);
-            ?>
-        </div>
-
-        <button class="btn btn-primary mt-2" id="add_stage"> Add Stage</button>
-
-        <div class="text-center">
-
-            <button class="btn btn-success w-50" id="save_stages">save</button>
-
-        </div>
-
-
-    </div>
 <script src="games.js"> </script>
 </body>
 </html>
