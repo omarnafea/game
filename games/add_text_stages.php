@@ -27,7 +27,14 @@ $stages = Stage::listStages($game_id);
     ?>
 
     <input type="hidden"  id="game_id" name="game_id" value="<?=$game_id?>">
-
+    <div class="col-md-3 mt-5">
+        <div class="form-group">
+            <label>Content Type</label>
+            <select class="form-control" id="content_type" disabled>
+                <option value="STRING" selected>Text</option>
+            </select>
+        </div>
+    </div>
 
     <div class="stages-container">
         <h2 class="mt-3 text-center text-primary">Stages</h2>

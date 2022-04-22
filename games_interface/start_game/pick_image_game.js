@@ -1,4 +1,12 @@
 
+$(document).ready(function () {
+    $(".stage-container").click();
+});
+
+$('.start-game').click(function () {
+    getFirstStage($("#game_id").val());
+    $(this).hide();
+});
 
 let stageIndex = 0;
 
@@ -31,10 +39,6 @@ function getFirstStage(game_id) {
 
 function renderNextStage(){
 
-    console.log(stageIndex);
-    console.log(stages);
-
-
     $("#progress").html(stageIndex+ 1 + '/' + stages.length);
     if(stageIndex === stages.length){
         Swal.fire({
@@ -48,6 +52,10 @@ function renderNextStage(){
     }
 
     currentStage = stages[stageIndex];
+
+
+    console.log(currentStage);
+
 
     $.ajax({
         url:"../ajax/get_stage_options.php",
@@ -70,7 +78,21 @@ function renderNextStage(){
         }
     });
 
-    $("#content").html(currentStage.content);
+
+    if(currentStage.content_type === "VOICE"){
+        $("#voiceContentSource").attr( 'src' , currentStage.content);
+
+        setTimeout(function () {
+            let aud = document.getElementById("voiceContent");
+            aud.load();
+            aud.play();
+        }, 1000);
+
+
+    }else{
+        $("#content").html(currentStage.content);
+
+    }
 }
 
 
@@ -84,11 +106,11 @@ function appendOption(option) {
     }
 
     let optionHTML = `
-    <div class="col-md-3 option ${isCorrectOption}" onclick="checkOption(this)">
     
-     
-      
-      <img src=" ${option.option}" class="img-fluid" height="200" width="200">
+    <div class='col-6'>
+       <div class="col-md-6 option ${isCorrectOption}" onclick="checkOption(this)">
+        <img src=" ${option.option}" class="img-fluid" height="200" width="200">
+       </div>
     </div>`;
 
     $("#options").append(optionHTML);

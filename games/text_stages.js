@@ -36,13 +36,14 @@ $("#save_stages").click(function () {
             }
         );
     }
-
+    const contentType = $("#content_type").val();
     $.ajax({
         url:"ajax/save_text_stages.php",
         method:'POST',
         data: {
             stages : stages_array,
-            game_id : $("#game_id").val()
+            game_id : $("#game_id").val(),
+            content_type :  contentType
         },
         dataType : "json",
         success:function(data)
@@ -92,17 +93,6 @@ $(document).on('change', '.correct-option', function() {
 $("#add_stage").click(function () {
 
     const stage = `<div class="row  stages-row">
-             <div class="col-md-3">
-                <div class="form-group">
-                    <label>Content Type</label>
-                     <select class="stage-content-type form-control" name="stage_content_type">
-                        <option value="-1">Select Content Type</option>
-                        <option value="STRING">Text</option>
-                        <option value="IMAGE">Image</option>
-                        <option value="VOICE">Voice</option>
-                    </select>
-                </div>
-            </div> 
             
             <div class="col-md-12">
                 <div class="form-group">

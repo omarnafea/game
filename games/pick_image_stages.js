@@ -19,21 +19,25 @@ $("#save_stages").click(function () {
         let optionsContent = {};
         let correctOption;
         const options = $(stages_rows[i]).find('.option');
-        const content = $(stages_rows[i]).find('.content').val();
 
-        formData.append('stage' + (i+1) + 'content' , content);
+        const contentType = $("#content_type").val();
+        formData.append('content_type' , contentType);
+
+        let content = '';
+
+        if(contentType === 'IMAGE' || contentType === 'VOICE') {
+            formData.append("contents[]",$(stages_rows[i]).find('.content').prop('files')[0]);
+        }else{
+            content = $(stages_rows[i]).find('.content').val();
+            formData.append('stage' + (i+1) + 'content' , content);
+        }
 
         for(let k = 0 ; k < options.length ; k++){
             if($(options[k]).siblings('input').is(":checked")){
-
                 formData.append('stage' + (i+1) + 'correct' , k +1);
+                }
 
-                // correctOption = $(options[k]).siblings('input').val();
-            }
-
-            // formData.append("file_" + i ,$(options[i]).prop('files')[0]);
             formData.append("file[]",$(options[k]).prop('files')[0]);
-            // optionsContent[$(options[i]).data('name')] = $(options[i]).prop('files')[0];
         }
 
         stages_array.push(
@@ -41,7 +45,6 @@ $("#save_stages").click(function () {
                 optionsContent : optionsContent,
                 content : content,
                 correct_answer : correctOption
-
             }
         );
     }
@@ -98,26 +101,35 @@ $(document).on('change', '.correct-option', function() {
 
 $("#add_stage").click(function () {
 
-    const stage = `<div class="row  stages-row">
-             <div class="col-md-3">
-                <div class="form-group">
-                    <label>Content Type</label>
-                     <select class="stage-content-type form-control" name="stage_content_type">
-                        <option value="-1">Select Content Type</option>
-                        <option value="STRING">Text</option>
-                        <option value="IMAGE">Image</option>
-                        <option value="VOICE">Voice</option>
-                    </select>
-                </div>
-            </div> 
-            
-            <div class="col-md-12">
+    let content = `
+     <div class="col-md-12">
                 <div class="form-group">
                     <label>Content</label>
                     <input type="text" class="form-control content" value="">
                 </div>
-            </div> 
-            
+            </div>`;
+
+
+    if($("#content_type").val() === 'IMAGE'){
+         content = `
+     <div class="col-md-12">
+                <div class="form-group">
+                    <label>Content</label>
+                    <input type="file" class="form-control content" accept=".jpg , .png , .jpeg">
+                </div>
+            </div>`;
+    }else if($("#content_type").val() === 'VOICE'){
+        content = `
+     <div class="col-md-12">
+                <div class="form-group">
+                    <label>Content</label>
+                    <input type="file" class="form-control content" accept=".mp3">
+                </div>
+            </div>`;
+    }
+
+    const stage = `<div class="row  stages-row">
+            ${content}
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Option 1</label>

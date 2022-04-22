@@ -11,7 +11,10 @@ include "../../upload/classes/Upload.php";
 
 $stagesCount = count($_FILES['file']['name']) / 4;
 
+$contentType = $_POST['content_type'];
+
 //var_dump($_POST);
+//var_dump($_FILES);die;
 
 $stage_index = 1;
 $stages = [];
@@ -21,11 +24,37 @@ for($i = 0 ; $i <$stagesCount ; $i++){
 
     $stage = [];
     $stage['optionsContent'] = [];
-    $stage['content'] = $_POST['stage' . $stage_index . 'content'];
+
+    if($contentType == "IMAGE"){
+        $newImage = [
+            'name' => $_FILES['contents']['name'][$i],
+            'type' => $_FILES['contents']['type'][$i],
+            'tmp_name' => $_FILES['contents']['tmp_name'][$i],
+            'error' => $_FILES['contents']['error'][$i],
+            'size' => $_FILES['contents']['size'][$i]
+        ];
+
+        $contentImage = Upload::uploadImage($newImage)['image'];
+        $stage['content'] = $contentImage;
+
+    }elseif ($contentType == "VOICE"){
+        $newVoice= [
+            'name' => $_FILES['contents']['name'][$i],
+            'type' => $_FILES['contents']['type'][$i],
+            'tmp_name' => $_FILES['contents']['tmp_name'][$i],
+            'error' => $_FILES['contents']['error'][$i],
+            'size' => $_FILES['contents']['size'][$i]
+        ];
+        $contentVoice = Upload::uploadVoice($newVoice)['voice'];
+
+
+        $stage['content'] = $contentVoice;
+
+    }else{
+        $stage['content'] = $_POST['stage' . $stage_index . 'content'];
+    }
 
     for($k =  $stage_index * 4 - 4; $k <= $stage_index * 4 - 1 ; $k++){
-
-        var_dump($k);
         $new_image = [];
         $new_image['name']=$_FILES['file']['name'][$k];
         $new_image['type']=$_FILES['file']['type'][$k];
@@ -35,7 +64,6 @@ for($i = 0 ; $i <$stagesCount ; $i++){
 
         $file = Upload::uploadImage($new_image);
         $file_path = $file['image'];
-//        var_dump($file);
 
         array_push($stage['optionsContent'] , $file_path);
 
@@ -46,31 +74,23 @@ for($i = 0 ; $i <$stagesCount ; $i++){
     $stage_index ++;
 }
 
-//var_dump($stages);
-
 Stage::deleteByGameId($_POST['game_id']);
 
 $stageIndex = 1;
 foreach ($stages as $stage){
-   $stage_id =  Stage::create($_POST['game_id'] , $stage['content']);
+   $stage_id =  Stage::create($_POST['game_id'] , $stage['content'] ,  $contentType);
 
    $optionIndex = 1;
    foreach ($stage['optionsContent'] as $key => $option){
 
-       $option_id = StageOptions::create($stage_id , $option);
+       $option_id = StageOptions::create($stage_id , $option );
        $correctOptionIndex = $_POST['stage' . $stageIndex . 'correct'];
 
        if($optionIndex == $correctOptionIndex){
            Stage::updateCorrectAnswer($stage_id , $option_id);
-
        }
-
        $optionIndex++;
    }
-
     $stageIndex++;
-
 }
-
-
 die(json_encode(['success'=>true , 'message'=>'Stages saved  successfully']));

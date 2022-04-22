@@ -13,18 +13,19 @@ include(__DIR__ . '/../../db_connect.php');
 class Stage
 {
 
-    static function create($game_id , $content){
+    static function create($game_id , $content , $content_type){
 
 
         global $con;
 
         $statement = $con->prepare("
-                    INSERT INTO game_stages (game_id , content)  
-                                       VALUES (:game_id , :content)");
+                    INSERT INTO game_stages (game_id , content , content_type)  
+                                       VALUES (:game_id , :content , :content_type)");
         $result = $statement->execute(
             array(
-                ':game_id'            => $game_id,
-                ':content'            => $content
+                ':game_id'       => $game_id,
+                ':content'       => $content,
+                ':content_type'  => $content_type
             )
         );
 

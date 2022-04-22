@@ -1,6 +1,7 @@
 <?php
 include './../../games/classes/Game.php';
-
+include '../../include/lang/lang_controller.php';
+$logoPath = "../../include/upload/logo.jpg";
 $game = Game::get($_GET['game_id']);
 
 ?>
@@ -8,7 +9,11 @@ $game = Game::get($_GET['game_id']);
     <head>
         <title>Games</title>
         <meta charset="utf-8"/>
-        <?php include "../../include/game_header.php";?>
+
+        <?php
+        include "../../include/game_header.php";
+        include "../../include/game_navbar.php";
+        ?>
         <link rel="stylesheet" href="questions_game.css">
     </head>
     <body>

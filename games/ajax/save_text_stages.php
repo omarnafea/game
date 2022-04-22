@@ -10,7 +10,7 @@ include "../classes/StageOptions.php";
 
 Stage::deleteByGameId($_POST['game_id']);
 foreach ($_POST['stages'] as $stage){
-   $stage_id =  Stage::create($_POST['game_id'] , $stage['content']);
+   $stage_id =  Stage::create($_POST['game_id'] , $stage['content'] , $_POST['content_type']);
 
    foreach ($stage['optionsContent'] as $key => $option){
 

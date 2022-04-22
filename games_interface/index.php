@@ -1,9 +1,11 @@
 <?php
 include './../games/classes/Game.php';
-
+include './../include/lang/lang_controller.php';
+$logoPath = "../include/upload/logo.jpg";
 if(!isset($_SESSION)){
     session_start();
 }
+
 
 $games = Game::listGames();
 
@@ -15,15 +17,16 @@ $games = Game::listGames();
     <?php include "../include/header.php";?>
     <link rel="stylesheet" href="games.css">
 </head>
-<body>
-<?php include "../include/navbar.php"?>
+<body class="<?=isset($_SESSION['lang'])  && $_SESSION['lang'] == 'ar'? 'rtl' :''?>">
+
+<?php
+include "../include/game_navbar.php";
+
+$isArabic = $_SESSION['lang'] == 'ar';
+
+?>
 <div class="container-fluid pt-5">
-
-    <?php
-//    include "../include/dashboard.php";
-    ?>
-
-    <h2 class="text-primary text-center mt-3">Games</h2>
+    <h2 class="text-primary text-center mt-3"><?=$lang['games']?></h2>
 
     <div class="games-container">
 
@@ -36,11 +39,12 @@ $games = Game::listGames();
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="<?=$game['image']?>" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title"> <?=$game['name_ar']?></h5>
-                            <p class="card-text"><?=$game['category_en']?></p>
+                            <h5 class="card-title"> <?=$isArabic ? $game['name_ar']: $game['name_en']?></h5>
+                            <p class="card-text">   <?=$isArabic ? $game['category_ar']: $game['category_en']?></p>
                         </div>
                         <div class="card-body my-0">
-                            <a href="<?=getGameLink($game)?>" class="btn btn-primary">Start</a>
+                            <a href="<?=getGameLink($game)?>" class="btn btn-success"><?=$lang['start']?>
+                                <i class="fas fa-play"></i></a>
                         </div>
                     </div>
                 </div>
