@@ -2,3 +2,20 @@
 .table-striped{
     font-size: 16px !important;
 }
+
+
+.bg-blue{
+    background-color:#017a91 !important; ;
+}
+
+.bg-yellow{
+    background-color: #f39c29 !important;;
+}
+.bg-purple{
+    background-color: #3c1c58 !important;;
+}
+
+
+.bg-red{
+    background-color: #eb1350 !important;;
+}

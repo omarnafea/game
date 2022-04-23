@@ -5,7 +5,7 @@
 
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a class="navbar-brand" href="../dashboard/index.php">
+    <a class="navbar-brand" href="<?=isset($_GET['game_id']) ? '../': 'index.php'?>">
         <img src="<?=$logoPath?>" width="45" height="45" alt="logo" class="img-fluid"/>
     </a>
 
@@ -19,7 +19,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="../categories"><?=$lang['categories']?></a>
+                    <a class="nav-link" href="<?=isset($_GET['game_id']) ? '../': 'index.php'?>"><?=$lang['games']?></a>
                 </li>
 
                 <li class="nav-item">

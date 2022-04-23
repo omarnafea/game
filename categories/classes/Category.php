@@ -65,4 +65,13 @@ class Category
         return $users;
     }
 
+    static function getCount(){
+        global $con;
+        $query = "SELECT COUNT(*) as count  FROM categories "; // db query
+        $statement = $con->prepare($query);  // prepare query
+        $statement->execute();
+        $game = $statement->fetch(PDO::FETCH_ASSOC);
+        return $game['count'];
+    }
+
 }

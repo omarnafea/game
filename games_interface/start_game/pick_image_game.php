@@ -1,10 +1,13 @@
 <?php
+if(!isset($_SESSION)) session_start();
+
 include './../../games/classes/Game.php';
 include '../../include/lang/lang_controller.php';
 $logoPath = "../../include/upload/logo.jpg";
 
 $game = Game::get($_GET['game_id']);
 
+//var_dump($_SESSION);die;
 ?>
     <html>
     <head>
@@ -16,7 +19,7 @@ $game = Game::get($_GET['game_id']);
         ?>
         <link rel="stylesheet" href="pick_image_game.css">
     </head>
-    <body>
+    <body class="<?=isset($_SESSION['lang'])  && $_SESSION['lang'] == 'ar'? 'rtl' :''?>">
     <div class="container-fluid pt-5">
 
         <input type="hidden" id="game_id" value="<?=$_GET['game_id']?>">

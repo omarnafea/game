@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION)){
+    session_start();
+}
 
 
 
@@ -12,6 +15,9 @@ $query_en = http_build_query($params_en);
 $query_ar = http_build_query($params_ar);
 
 $pageLink = 'http://localhost' . explode('?',$__page_url  )[0];
+
+
+//var_dump($_SESSION);die;
 
 
 if(isset($_GET['lang'])){

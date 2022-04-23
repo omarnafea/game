@@ -8,7 +8,13 @@ include "../categories/classes/Category.php";
 $game_id = $_GET['game_id'];
 $game= Game::get($game_id);
 $stages = Stage::listStages($game_id);
+$contentType = "STRING";
 
+$hasStages = false;
+if(count($stages) > 0){
+    $contentType = $stages[0]['content_type'];
+    $hasStages = true;
+}
 ?>
 <html>
 <head>
@@ -31,10 +37,10 @@ $stages = Stage::listStages($game_id);
     <div class="col-md-3 mt-5">
         <div class="form-group">
             <label>Content Type</label>
-            <select class="form-control" id="content_type">
-                <option value="STRING" selected>Text</option>
-                <option value="IMAGE">Image</option>
-                <option value="VOICE">Voice</option>
+            <select class="form-control" id="content_type" <?=$hasStages ?'disabled'  : ''?>>
+                <option value="STRING" <?=$contentType === 'STRING' ?  'selected': ''?>>Text</option>
+                <option value="IMAGE" <?=$contentType === 'IMAGE' ?  'selected': ''?>>Image</option>
+                <option value="VOICE"  <?=$contentType === 'VOICE' ?  'selected': ''?>>Voice</option>
             </select>
         </div>
     </div>
