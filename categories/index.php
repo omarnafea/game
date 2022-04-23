@@ -1,6 +1,13 @@
 <?php
-include './classes/Category.php';
 
+if(!isset($_SESSION))
+    session_start();
+
+if(!isset($_SESSION['user_id'])){
+    header("location:../login");
+}
+
+include './classes/Category.php';
 $categories = Category::listCategories();
 
 /*

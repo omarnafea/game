@@ -1,4 +1,13 @@
 <?php
+
+
+if(!isset($_SESSION))
+    session_start();
+
+if(!isset($_SESSION['user_id'])){
+    header("location:../login");
+}
+
 $game_id = -1;
 $category_id = -1;
 $type = "";

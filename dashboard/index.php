@@ -1,5 +1,13 @@
-
 <?php
+
+if(!isset($_SESSION))
+    session_start();
+
+
+if(!isset($_SESSION['user_id']))
+    header("location:../login");
+
+
 include "../games/classes/Game.php";
 include "../categories/classes/Category.php";
 include "../users/classes/User.php";

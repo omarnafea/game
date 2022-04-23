@@ -1,4 +1,12 @@
 <?php
+
+if(!isset($_SESSION))
+    session_start();
+
+if(!isset($_SESSION['user_id'])){
+    header("location:../login");
+}
+
 $category_id = -1;
 $name_en = "";
 $name_ar = "";
