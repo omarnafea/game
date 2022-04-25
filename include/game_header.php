@@ -18,6 +18,10 @@ if(!isset($_SESSION)) session_start();
 <script src="../../assets/js/boot.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+<script src="../../assets/js/confetti.js"></script>
+
+
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 

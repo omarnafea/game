@@ -105,7 +105,7 @@ $("#add_stage").click(function () {
                 <div class="form-group">
                     <label>Option 1</label>
                     <div class="row">
-                      <input type="checkbox" class="col-2 form-control correct-option" value="option_1">
+                      <input type="checkbox"  checked class="col-2 form-control correct-option" value="option_1">
                       <input type="text" data-name="option_1" class="col-10 form-control option option-1" value="">
                      </div>
                   

@@ -56,21 +56,21 @@ if(count($stages) > 0){
 
     <div class="stages-container">
         <h2 class="mt-3 text-center text-primary">Stages</h2>
+
+        <?php
+        printStages($stages);
+        ?>
+
+
         <div id="stages">
-            <?php
-              printStages($stages);
-            ?>
+
         </div>
 
         <button class="btn btn-primary mt-2" id="add_stage"> Add Stage</button>
 
-
-        <div class="text-center">
-
+        <div class="text-center mb-3">
             <button class="btn btn-success w-50" id="save_stages">save</button>
-
         </div>
-
 
     </div>
 <script src="pick_image_stages.js"> </script>
@@ -81,11 +81,30 @@ if(count($stages) > 0){
 <?php
 function printStages ($stages){
     foreach ($stages as $stage){?>
-<div class="row  stages-row">
+<div class="row mb-5">
     <div class="col-md-12">
         <div class="form-group">
-            <label>content</label>
-            <input type="text" class="form-control content" value="<?=$stage['content']?>">
+
+            <div class="row">
+
+                <label class="m-2">content</label>
+
+                <?php
+                if ($stage['content_type'] === "STRING"){?>
+                    <input type="text" class="form-control content" value="<?=$stage['content']?>">
+                    <button class="btn btn-primary mt-2" onclick="EditTextContent(<?=$stage['id']?>)"> Edit</button>
+                <?php }elseif ($stage['content_type'] === "IMAGE"){?>
+                    <img src="<?=$stage['content']?>" class="img-fluid" width="200" height="200">
+                    <button class="btn btn-primary mt-2" onclick="EditImageContent(<?=$stage['id']?>)"> Edit</button>
+                <?php }elseif ($stage['content_type'] === "VOICE"){?>
+                    <audio  preload='auto' id="voiceContent" controls>
+                        <source id="voiceContentSource"  src="<?=$stage['content']?>" type="audio/mpeg" >
+                    </audio>
+
+                    <button class="btn btn-primary ml-2" onclick="EditVoiceContent(<?=$stage['id']?>)"> Edit</button>
+                <?php }?>
+            </div>
+
         </div>
     </div>
 
@@ -99,8 +118,14 @@ function printStages ($stages){
                 <div class="form-group">
                     <label>Option <?=$i?></label>
                     <div class="row">
-                        <input type="checkbox" <?php if($stage['correct_answer_id'] == $option['id']) echo 'checked'?> class="col-2 form-control correct-option" value="option_<?=$i?>">
-                        <input type="text" data-name="option_<?=$i?>" class="col-10 form-control option option-<?=$i?>" value="<?=$option['option']?>">
+                        <input type="checkbox"
+                            <?php if($stage['correct_answer_id'] == $option['id']) echo 'checked'?>
+                               class="col-2 form-control correct-option" value="option_<?=$i?>"
+                               data-stage_id="<?=$stage['id']?>" data-option_id="<?=$option['id']?>">
+                       <div>
+                           <img src="<?=$option['option']?>" class="img-fluid" width="200" height="200">
+                       </div>
+                        <button class="btn btn-primary" onclick="editOption(<?=$option['id']?>)"> Edit</button>
                     </div>
 
                 </div>
@@ -112,19 +137,109 @@ function printStages ($stages){
     ?>
 
 
-    <div class="col-md-3">
-        <button class="btn btn-danger delete-btn" onclick="deleteRow(this)"><i class="fa fa-times-circle"></i></button>
+    <div class="col-md-5">
+        <button class="btn btn-danger delete-btn" data-id ="<?=$stage['id']?>" onclick="deleteRow(this)"><i class="fa fa-times-circle"></i></button>
     </div>
 
+    <hr class="text-success">
 </div>
 
    <?php
-
-
     }
-
-
 }
 
 
 ?>
+
+
+<div id="edit_option_modal" class="modal fade">
+    <div class="modal-dialog">
+        <form method="post" id="edit_option_form" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title blue font-weight-bold">Edit Option</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="blue">Option</label>
+                        <input type="file" class="form-control" name="option_image" accept=".jpg , .png , .jpeg" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                    <input type="hidden" name="option_id" id="option_id" value="" />
+                    <button type="button" class="btn btn-default close_btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="edit_content_text_modal" class="modal fade">
+    <div class="modal-dialog">
+        <form method="post" id="edit_content_text_form" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title blue font-weight-bold">Edit Content</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="blue">content</label>
+                        <input type="text" class="form-control" name="option_image"  required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                    <input type="hidden" name="stage_id" class="stage-id" value="" />
+                    <button type="button" class="btn btn-default close_btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="edit_content_voice_modal" class="modal fade">
+    <div class="modal-dialog">
+        <form method="post" id="edit_content_voice_form" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title blue font-weight-bold">Edit Content</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="blue">content</label>
+                        <input type="text" class="form-control" name="option_image"  required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                    <input type="hidden" name="stage_id" class="stage-id" value="" />
+                    <button type="button" class="btn btn-default close_btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="edit_content_image_modal" class="modal fade">
+    <div class="modal-dialog">
+        <form method="post" id="edit_content_image_form" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title blue font-weight-bold">Edit Content</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="blue">content</label>
+                        <input type="file" class="form-control" name="option_image" accept=".jpg , .png , .jpeg" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                    <input type="hidden" name="stage_id" class="stage-id" value="" />
+                    <button type="button" class="btn btn-default close_btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

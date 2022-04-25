@@ -30,6 +30,18 @@ class StageOptions
         return $con->lastInsertId();
     }
 
+    static function update($id , $option){
+
+        global $con;
+        $statement = $con->prepare(" UPDATE stage_options SET option = :option WHERE id = :id");
+        $result = $statement->execute(
+            array(
+                ':id'    => $id,
+                ':option'      => $option
+            )
+        );
+    }
+
 
     static function listOptions($stage_id){
         global $con;

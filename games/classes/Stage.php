@@ -101,4 +101,17 @@ class Stage
         return $game;
     }
 
+    static function deleteByIds($ids){
+
+        global $con;
+        $query = "delete  gs, so
+                  FROM game_stages as gs
+                  join stage_options as so on so.stage_id =  gs.id  
+                  WHERE gs.id IN(?)"; // db query
+        $statement = $con->prepare($query);  // prepare query
+        $statement->execute([$ids]);
+        $game = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $game;
+    }
+
 }

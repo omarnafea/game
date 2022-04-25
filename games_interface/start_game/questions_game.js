@@ -37,6 +37,7 @@ function renderNextStage(){
 
     $("#progress").html(stageIndex+ 1 + '/' + stages.length);
     if(stageIndex === stages.length){
+        startConfetti();
         Swal.fire({
             icon: 'success',
             title: 'Game finished',

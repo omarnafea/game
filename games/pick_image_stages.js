@@ -1,6 +1,20 @@
 
+let deletedStages = [];
+
+
 function deleteRow(element){
     $(element).parent().parent().remove();
+
+    if($(element).attr("data-id") !== undefined)
+        deletedStages.push($(element).attr("data-id"));
+}
+
+
+function editOption(id){
+
+    $("#edit_option_modal").modal();
+    $("#option_id").val(id);
+
 }
 
 
@@ -12,6 +26,7 @@ $("#save_stages").click(function () {
     let formData = new FormData();
 
     formData.append('game_id', $("#game_id").val());
+    formData.append('deleted_stages',deletedStages);
 
 
     for(let i  = 0  ; i < stages_rows.length; i++){
@@ -81,6 +96,23 @@ $(document).on('change', '.correct-option', function() {
 
     if ($(this).is(':checked'))
     {
+        const option_id = $(this).data("option_id");
+        const stage_id = $(this).data("stage_id");
+        if(option_id !== undefined){
+            $.ajax({
+                url:"ajax/edit_stage_correct_option.php",
+                method:'POST',
+                data:{
+                    option_id : option_id,
+                    stage_id : stage_id
+                },
+                dataType:"json",
+                success:function(data)
+                {
+                    window.location.reload();
+                }
+            });
+        }
 
         const parentRow = $(this).closest( ".stages-row");
 
@@ -134,7 +166,7 @@ $("#add_stage").click(function () {
                 <div class="form-group">
                     <label>Option 1</label>
                     <div class="row">
-                      <input type="checkbox" class="col-2 form-control correct-option" value="option_1">
+                      <input type="checkbox" checked class="col-2 form-control correct-option" value="option_1">
                       <input type="file" accept=".jpg , .png , .jpeg" data-name="option_1" class="col-10 form-control option option-1">
                      </div>
                   
@@ -178,4 +210,35 @@ $("#add_stage").click(function () {
 
         </div>`;
     $('#stages').append(stage);
+});
+
+
+
+
+$(document).on('submit', '#edit_option_form', function(event){
+    event.preventDefault();
+    $.ajax({
+        url:"ajax/edit_option.php",
+        method:'POST',
+        data:new FormData(this),
+        contentType:false,
+        processData:false,
+        dataType:"json",
+        success:function(data)
+        {
+            if(data.success===true){
+               window.location.reload();
+            }else{
+                Swal.fire(
+                    'Warning',
+                    data.error ,
+                    'warning'
+                )
+
+            }
+
+
+        }
+    });
+
 });

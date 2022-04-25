@@ -9,12 +9,18 @@ include "../classes/StageOptions.php";
 include "../../upload/classes/Upload.php";
 
 
+if(!empty($_POST['deleted_stages'])){
+    Stage::deleteByIds($_POST['deleted_stages']);
+}
+
+if(empty($_FILES))
+    die;
+
+
+
 $stagesCount = count($_FILES['file']['name']) / 4;
 
 $contentType = $_POST['content_type'];
-
-//var_dump($_POST);
-//var_dump($_FILES);die;
 
 $stage_index = 1;
 $stages = [];
@@ -74,7 +80,6 @@ for($i = 0 ; $i <$stagesCount ; $i++){
     $stage_index ++;
 }
 
-Stage::deleteByGameId($_POST['game_id']);
 
 $stageIndex = 1;
 foreach ($stages as $stage){
