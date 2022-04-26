@@ -12,11 +12,11 @@ $response = [
 
     $user = User::getByUserNameAndPassword($username , $password);
 
-    if($user){
+    if($user !== false){
         $_SESSION['username']=$username;      // Register Session Name
         $_SESSION['user_id']=$user['id'];  // Register Session ID
     }
-    else{
+    else{ // $user= false
         $response['success'] = false;
         $response['message'] = "Username or password not correct";
     }

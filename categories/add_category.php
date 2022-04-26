@@ -1,33 +1,38 @@
 <?php
 
+//isset => if (var) defined and != null => true : false
+
 if(!isset($_SESSION))
     session_start();
 
 if(!isset($_SESSION['user_id'])){
-    header("location:../login");
+    header("location:../login/index.php");
 }
 
 $category_id = -1;
 $name_en = "";
 $name_ar = "";
+
 include "./classes/Category.php";
 $update_mode = false; //add category (not Update)
 
-include '../db_connect.php';
 if(isset($_GET['category_id'])){
+
 $update_mode = true;
 $category_id = $_GET['category_id'];
 
 $category = Category::get($category_id);
 
+
+//echo '<pre>';
+//print_r($category);
+//echo '</pre>';
+//die;
+
 $name_en = $category["name_en"];
 $name_ar = $category["name_ar"];
 
-/*
-echo '<pre>';
-print_r($category);
-echo '</pre>';die;
-*/
+
 
 
 }
@@ -64,26 +69,24 @@ echo '</pre>';die;
 
         <form id="add_category_form">
              
-        <div class="form-group">
-            <label>Name EN</label>
-            <input  type="text" value="<?=$name_en?>" class="form-control" name="name_en" id="name_en" placeholder="Enter category name in english" required >
-        </div>
+            <div class="form-group">
+                <label>Name EN</label>
+                <input  type="text" value="<?=$name_en?>" class="form-control" name="name_en" id="name_en" placeholder="Enter category name in english" required >
+            </div>
 
-        <div class="form-group">
-            <label>Name AR</label>
-            <input  type="text" value="<?=$name_ar?>" class="form-control" name="name_ar" id="name_ar" placeholder="Enter category name in arabic" required >
-        </div>
+            <div class="form-group">
+                <label>Name AR</label>
+                <input  type="text" value="<?=$name_ar?>" class="form-control" name="name_ar" id="name_ar" placeholder="Enter category name in arabic" required >
+            </div>
 
-        
-        <div class="text-center">
-            <input type="submit" class="btn btn-primary submit-btn" value="Save">
-        </div>
 
-        <input type="hidden"  id="category_id" name="category_id" value="<?=$category_id?>">
+            <div class="text-center">
+                <input type="submit" class="btn btn-primary submit-btn" value="Save">
+            </div>
+
+            <input type="hidden"  id="category_id" name="category_id" value="<?=$category_id?>">
 
         </form>
-
-
 </div>
 <script src="categories.js"> </script>
 </body>

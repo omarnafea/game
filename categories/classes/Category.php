@@ -9,12 +9,10 @@
 
 include(__DIR__ . '/../../db_connect.php');
 
-
 class Category
 {
 
     static function create($name_en , $name_ar ){
-
         global $con;
 
         $statement = $con->prepare("
@@ -30,11 +28,11 @@ class Category
     static function update( $id ,$name_en , $name_ar){
 
         global $con;
-        $params =    array(
+        $params =  [
             ':name_en'              => $name_en,
             ':name_ar'             => $name_ar,
             ':category_id'           => $id,
-        );
+        ];
 
         $statement = $con->prepare(
             "UPDATE categories 
@@ -61,8 +59,8 @@ class Category
         $query = "SELECT *  FROM categories "; // db query
         $statement = $con->prepare($query);  // prepare query
         $statement->execute();
-        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $users;
+        $categories = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $categories;
     }
 
     static function getCount(){
@@ -70,8 +68,9 @@ class Category
         $query = "SELECT COUNT(*) as count  FROM categories "; // db query
         $statement = $con->prepare($query);  // prepare query
         $statement->execute();
-        $game = $statement->fetch(PDO::FETCH_ASSOC);
-        return $game['count'];
+        $count = $statement->fetch(PDO::FETCH_ASSOC);
+        return $count['count'];
     }
+
 
 }

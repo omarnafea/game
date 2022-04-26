@@ -72,19 +72,11 @@ $("#save_stages").click(function () {
         contentType: false,
         success:function(data)
         {
-            if(data.success){
-                Swal.fire({
-                    icon: 'success',
-                    title: '',
-                    text: data.message
-                })
-            }else{
-                Swal.fire({
-                    icon: 'warning',
-                    title: '',
-                    text: data.message
-                })
-            }
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Game stages saved successfully'
+            })
         }
     });
 
@@ -240,5 +232,101 @@ $(document).on('submit', '#edit_option_form', function(event){
 
         }
     });
+});
 
+
+function EditVoiceContent(stageId) {
+    $("#edit_content_voice_modal").modal();
+    $("#edit_content_voice_form .stage-id").val(stageId);
+}
+$(document).on('submit', '#edit_content_voice_form', function(event){
+    event.preventDefault();
+    $.ajax({
+        url:"ajax/edit_stage_voice_content.php",
+        method:'POST',
+        data:new FormData(this),
+        contentType:false,
+        processData:false,
+        dataType:"json",
+        success:function(data)
+        {
+            if(data.success===true){
+                window.location.reload();
+            }else{
+                Swal.fire(
+                    'Warning',
+                    data.error ,
+                    'warning'
+                )
+
+            }
+
+
+        }
+    });
+});
+
+function EditImageContent(stageId) {
+    $("#edit_content_image_modal").modal();
+    $("#edit_content_image_form .stage-id").val(stageId);
+}
+$(document).on('submit', '#edit_content_image_form', function(event){
+    event.preventDefault();
+    $.ajax({
+        url:"ajax/edit_stage_image_content.php",
+        method:'POST',
+        data:new FormData(this),
+        contentType:false,
+        processData:false,
+        dataType:"json",
+        success:function(data)
+        {
+            if(data.success===true){
+                window.location.reload();
+            }else{
+                Swal.fire(
+                    'Warning',
+                    data.error ,
+                    'warning'
+                )
+
+            }
+
+
+        }
+    });
+});
+
+function EditTextContent(stageId , e) {
+    $("#edit_content_text_modal").modal();
+    $("#edit_content_text_form .stage-id").val(stageId);
+
+    const content = $(e).siblings('input').val();
+    $("#edit_content_text_form .content").val(content);
+}
+$(document).on('submit', '#edit_content_text_form', function(event){
+    event.preventDefault();
+    $.ajax({
+        url:"ajax/edit_stage_text_content.php",
+        method:'POST',
+        data:new FormData(this),
+        contentType:false,
+        processData:false,
+        dataType:"json",
+        success:function(data)
+        {
+            if(data.success===true){
+                window.location.reload();
+            }else{
+                Swal.fire(
+                    'Warning',
+                    data.error ,
+                    'warning'
+                )
+
+            }
+
+
+        }
+    });
 });

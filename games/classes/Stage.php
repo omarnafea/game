@@ -63,6 +63,20 @@ class Stage
         $result = $statement->execute($params);
         return $result;
     }
+    static function updateContent( $id ,$content){
+
+        global $con;
+        $params = array(
+            ':id'                    => $id,
+            ':content'               => $content,
+        );
+
+        $statement = $con->prepare(
+            "UPDATE game_stages 
+                      SET content = :content  where id = :id");
+        $result = $statement->execute($params);
+        return $result;
+    }
 
 
     static function get($id){

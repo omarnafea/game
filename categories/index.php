@@ -9,14 +9,11 @@ if(!isset($_SESSION['user_id'])){
 
 include './classes/Category.php';
 $categories = Category::listCategories();
-
-/*
-echo "<pre>";
-print_r($categories);
-echo "</pre>";
-die;
-*/
-
+//
+//echo "<pre>";
+//print_r($categories);
+//echo "</pre>";
+//die;
 ?>
 <html>
 <head>
@@ -38,9 +35,9 @@ die;
     <table id="categories_table" class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th scope="col">Name EN</th>
-            <th scope="col">Name AR</th>
-            <th scope="col">Edit</th>
+            <th>Name EN</th>
+            <th>Name AR</th>
+            <th>Edit</th>
         </tr>
         </thead>
         <tbody>
@@ -51,7 +48,7 @@ die;
                <td><?=$category['name_en']?></td>
                <td><?=$category['name_ar']?></td>
                <td>
-                   <a href="add_category.php?category_id=<?=$category['category_id']?>"  class="btn btn-primary">Edit</a>
+                   <a href="add_category.php?category_id=<?= $category['category_id']?>"  class="btn btn-primary">Edit</a>
                </td>
               </tr>
           <?php }?>

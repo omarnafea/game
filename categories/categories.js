@@ -1,17 +1,16 @@
 $("#categories_table").dataTable();
 
 
-
-
 $(document).on('submit', '#add_category_form', function(event){
     event.preventDefault();
 
-   
+
     let ajax_url = "ajax/add_category.php";
 
     if($("#category_id").val() !== '-1'){
         ajax_url = "ajax/update_category.php"
     }
+
 
     $.ajax({
         url:ajax_url,
@@ -22,7 +21,9 @@ $(document).on('submit', '#add_category_form', function(event){
         dataType : "json",
         success:function(data)
         {
-           if(data.success){
+
+
+           if(data.success === true){
                Swal.fire({
                    icon: 'success',
                    title: '',

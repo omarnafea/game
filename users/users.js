@@ -5,19 +5,7 @@
 $(document).on('submit', '#user_add_form', function(event){
     event.preventDefault();
 
-    //from validation
-    if($("#privilege_id").val() === '-1'){
-        Swal.fire({
-            icon: 'warning',
-            title: '',
-            text: 'Please select a privilege'
-        });
-        return false;
-    }
-
     let ajax_url = "ajax/index.php";
-
-   console.log('user id  : ' , $("#user_id").val());
 
     if($("#user_id").val() !== '-1'){
         ajax_url = "ajax/update_user.php";
