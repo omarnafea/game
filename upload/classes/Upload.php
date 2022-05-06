@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ultimate-pc
- * Date: 2022/04/08
- * Time: 03:59 م
- */
 
 class Upload
 {
 
      static function uploadImage($file){
          $output=array();
-         $allowed_extension=array('jpeg','jpg','png');
+         $allowed_extension=array('jpeg','jpg','png' , 'jfif');
 
          $imageName=$file['name'];
          $imageSize=$file['size'];

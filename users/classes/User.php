@@ -1,36 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * Game: ultimate-pc
- * Date: 2022/03/19
- * Time: 09:11 م
- */
-
 
 include(__DIR__ . '/../../db_connect.php');
-
 
 class User
 {
 
-    static function getByUserNameAndPassword($username , $password){
+    static function getByUserNameAndPassword($username, $password)
+    {
         global $con;
         $query = "SELECT *  FROM users where user_name = ? AND password = ?"; // db query
         $statement = $con->prepare($query);  // prepare query
-        $statement->execute([$username , $password]);
+        $statement->execute([$username, $password]);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         return $user;
     }
 
 
-
-    static function create($name , $email , $username , $password){
+    static function create($name, $email, $username, $password)
+    {
 
         global $con;
 
         $statement = $con->prepare("
-   INSERT INTO users (name, email,user_name,password) 
-   VALUES (:name, :email, :user_name,:password )");
+                 INSERT INTO users (name, email,user_name,password) 
+                VALUES (:name, :email, :user_name,:password )");
         $result = $statement->execute(
             array(
                 ':name'            => $name,
@@ -41,7 +34,8 @@ class User
         );
     }
 
-    static function update( $id ,$name , $email , $username , $password = ""){
+    static function update($id, $name, $email, $username, $password = "")
+    {
 
         global $con;
 
@@ -54,23 +48,25 @@ class User
             ':user_id'           => $id,
         );
 
-        if(trim($_POST['password'])  !== ""){
+        if (trim($_POST['password'])  !== "") {
 
-            $pass=',password = :password';
+            $pass = ',password = :password';
             $params[':password'] = sha1($_POST["password"]);
         }
 
         $statement = $con->prepare(
             "UPDATE users 
                       SET name = :name,email = :email ,user_name = :user_name {$pass}
-                       WHERE id = :user_id");
+                       WHERE id = :user_id"
+        );
 
         $result = $statement->execute($params);
         return $result;
     }
 
 
-    static function get($id){
+    static function get($id)
+    {
         global $con;
         $query = "SELECT *  FROM users where id = ?"; // db query
         $statement = $con->prepare($query);  // prepare query
@@ -79,7 +75,8 @@ class User
         return $user;
     }
 
-    static function listUsers(){
+    static function listUsers()
+    {
 
         global $con;
         $query = "SELECT *  FROM users "; // db query
@@ -89,7 +86,8 @@ class User
         return $users;
     }
 
-    static function getCount(){
+    static function getCount()
+    {
         global $con;
         $query = "SELECT COUNT(*) as count  FROM users "; // db query
         $statement = $con->prepare($query);  // prepare query
@@ -97,5 +95,4 @@ class User
         $game = $statement->fetch(PDO::FETCH_ASSOC);
         return $game['count'];
     }
-
 }

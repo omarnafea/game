@@ -7,6 +7,19 @@ function deleteRow(element){
 
     if($(element).attr("data-id") !== undefined)
         deletedStages.push($(element).attr("data-id"));
+
+
+    const stages_container = $(".stage-container");
+
+    console.log(stages_container.length);
+
+    if(stages_container.length > 0){
+        $("#content_type").attr('disabled' , true);
+    }else{
+        $("#content_type").attr('disabled' , false);
+
+    }
+
 }
 
 
@@ -21,6 +34,16 @@ function editOption(id){
 $("#save_stages").click(function () {
 
     const stages_rows = $(".stages-row");
+
+    if(stages_rows.length < 1 && $(".stage-container").length < 1){
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: "You must at least add one stage"
+        });
+        return ;
+    }
+
     let stages_array = [];
 
     let formData = new FormData();
@@ -76,6 +99,8 @@ $("#save_stages").click(function () {
                 icon: 'success',
                 title: 'Success',
                 text: 'Game stages saved successfully'
+            }).then(function () {
+                window.location.reload();
             })
         }
     });
@@ -101,6 +126,7 @@ $(document).on('change', '.correct-option', function() {
                 dataType:"json",
                 success:function(data)
                 {
+                    //refresh the page
                     window.location.reload();
                 }
             });
@@ -139,7 +165,7 @@ $("#add_stage").click(function () {
      <div class="col-md-12">
                 <div class="form-group">
                     <label>Content</label>
-                    <input type="file" class="form-control content" accept=".jpg , .png , .jpeg">
+                    <input type="file" class="form-control content" accept=".jpg , .png , .jpeg , .jfif">
                 </div>
             </div>`;
     }else if($("#content_type").val() === 'VOICE'){
@@ -152,14 +178,14 @@ $("#add_stage").click(function () {
             </div>`;
     }
 
-    const stage = `<div class="row  stages-row">
+    const stage = `<div class="row  stages-row stage-container">
             ${content}
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Option 1</label>
                     <div class="row">
                       <input type="checkbox" checked class="col-2 form-control correct-option" value="option_1">
-                      <input type="file" accept=".jpg , .png , .jpeg" data-name="option_1" class="col-10 form-control option option-1">
+                      <input type="file" accept=".jpg , .png , .jpeg , .jfif" data-name="option_1" class="col-10 form-control option option-1">
                      </div>
                   
                 </div>
@@ -170,7 +196,7 @@ $("#add_stage").click(function () {
                     <label>Option 2</label>
                      <div class="row">
                         <input type="checkbox" class="col-2 form-control correct-option" value="option_2">
-                        <input type="file" accept=".jpg , .png , .jpeg"  data-name="option_2" class="col-10 form-control option option-2">
+                        <input type="file" accept=".jpg , .png , .jpeg , .jfif"  data-name="option_2" class="col-10 form-control option option-2">
                      </div>                
                   </div>
             </div>
@@ -180,7 +206,7 @@ $("#add_stage").click(function () {
                     <label>Option 3</label>
                      <div class="row">
                         <input type="checkbox" class="col-2 form-control correct-option" value="option_3">
-                        <input type="file" accept=".jpg , .png , .jpeg" data-name="option_3" class="col-10 form-control option option-3">
+                        <input type="file" accept=".jpg , .png , .jpeg , .jfif" data-name="option_3" class="col-10 form-control option option-3">
                      </div>   
                     </div>
             </div>
@@ -190,7 +216,7 @@ $("#add_stage").click(function () {
                     <label>Option 4</label>
                     <div class="row">
                         <input type="checkbox" class="col-2 form-control correct-option" value="option_4">
-                        <input type="file" accept=".jpg , .png , .jpeg"  data-name="option_4" class="col-10 form-control option option-4">
+                        <input type="file" accept=".jpg , .png , .jpeg, .jfif"  data-name="option_4" class="col-10 form-control option option-4">
                      </div>   
                 </div>
             </div>
@@ -202,6 +228,7 @@ $("#add_stage").click(function () {
 
         </div>`;
     $('#stages').append(stage);
+
 });
 
 

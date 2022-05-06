@@ -46,7 +46,7 @@ $game = Game::get($_GET['game_id']);
             <audio  preload='auto' id="voiceContent">
                 <source id="voiceContentSource"  src="" type="audio/mpeg" >
             </audio>
-            <div id="content" class="m-2 d-none"></div>
+            <h5 id="content" class="m-2 d-none"></h5>
             <div id="options" class="row mt-2 p-3">
             </div>
 

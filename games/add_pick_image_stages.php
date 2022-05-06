@@ -44,7 +44,7 @@ if(count($stages) > 0){
     <div class="col-md-3 mt-5">
         <div class="form-group">
             <label>Content Type</label>
-            <select class="form-control" id="content_type" <?=$hasStages ?'disabled'  : ''?>>
+            <select class="form-control"  id="content_type" <?=$hasStages ?'disabled'  : ''?>>
                 <option value="STRING" <?=$contentType === 'STRING' ?  'selected': ''?>>Text</option>
                 <option value="IMAGE" <?=$contentType === 'IMAGE' ?  'selected': ''?>>Image</option>
                 <option value="VOICE"  <?=$contentType === 'VOICE' ?  'selected': ''?>>Voice</option>
@@ -85,7 +85,7 @@ function printStages ($stages){
     <div class="col-md-12">
         <div class="form-group">
 
-            <div class="row">
+            <div class="row stage-container">
 
                 <label class="m-2">content</label>
 
@@ -123,7 +123,7 @@ function printStages ($stages){
                                class="col-2 form-control correct-option" value="option_<?=$i?>"
                                data-stage_id="<?=$stage['id']?>" data-option_id="<?=$option['id']?>">
                        <div>
-                           <img src="<?=$option['option']?>" class="img-fluid" width="200" height="200">
+                           <img src="<?=$option['option']?>" class="" width="200" height="200">
                        </div>
                     </div>
                     <button class="btn btn-primary" onclick="editOption(<?=$option['id']?>)"> Edit</button>
@@ -162,7 +162,7 @@ function printStages ($stages){
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="blue">Option</label>
-                        <input type="file" class="form-control" name="option_image" accept=".jpg , .png , .jpeg" required>
+                        <input type="file" class="form-control" name="option_image" accept=".jpg , .png , .jpeg, .jfif" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -232,7 +232,7 @@ function printStages ($stages){
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="blue">content</label>
-                        <input type="file" class="form-control" name="content" accept=".jpg , .png , .jpeg" required>
+                        <input type="file" class="form-control" name="content" accept=".jpg , .png , .jpeg, .jfif" required>
                     </div>
                 </div>
                 <div class="modal-footer">

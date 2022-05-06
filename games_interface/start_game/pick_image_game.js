@@ -90,11 +90,8 @@ function renderNextStage(){
             aud.load();
             aud.play();
         }, 1000);
-
-
     }else{
-        $("#content").html(currentStage.content);
-
+        $("#content").removeClass('d-none').html(currentStage.content);
     }
 }
 
@@ -112,7 +109,7 @@ function appendOption(option) {
     
     <div class='col-6'>
        <div class="col-md-6 option ${isCorrectOption}" onclick="checkOption(this)">
-        <img src=" ${option.option}" class="img-fluid" height="200" width="200">
+        <img src=" ${option.option}" class="" height="200" width="200">
        </div>
     </div>`;
 

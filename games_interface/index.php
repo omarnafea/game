@@ -37,7 +37,7 @@ $isArabic = $_SESSION['lang'] == 'ar';
 
                 <div class="game-cart col-md-4 mt-2 ">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="<?=$game['image']?>" alt="Card image cap">
+                        <img class="card-img-top" src="<?=$game['image']?>" alt="Card image cap" width="300" height="300">
                         <div class="card-body">
                             <h5 class="card-title"> <?=$isArabic ? $game['name_ar']: $game['name_en']?></h5>
                             <p class="card-text">   <?=$isArabic ? $game['category_ar']: $game['category_en']?></p>

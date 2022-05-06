@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * Game: ultimate-pc
- * Date: 2022/03/19
- * Time: 09:11 م
- */
-
 
 include(__DIR__ . '/../../db_connect.php');
 
@@ -97,8 +90,7 @@ class Game
        return [
 
            'TEXT_QUESTIONS' => 'QUESTIONS',
-           'PICK_IMAGE' => 'PICK IMAGE',
-           'DRAG_ELEMENT' => 'DRAG ELEMENT'
+           'PICK_IMAGE' => 'PICK IMAGE'
        ];
     }
 

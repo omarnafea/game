@@ -8,6 +8,16 @@ $("#save_stages").click(function () {
 
     const stages_rows = $(".stages-row");
 
+
+    if(stages_rows.length < 1){
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: "You must at least add one stage"
+        });
+        return ;
+    }
+
     let stages_array = [];
 
     for(let i  = 0  ; i < stages_rows.length; i++){

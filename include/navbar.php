@@ -4,8 +4,6 @@
 if(!isset($_SESSION))
 session_start();
 
-include "auth.php";
-
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <a class="navbar-brand" href="../dashboard/index.php">
@@ -36,8 +34,6 @@ include "auth.php";
                 <li class="nav-item">
                     <a class="nav-link" href="../categories">CATEGORIES</a>
                 </li>
-
-
 
             </ul>
 

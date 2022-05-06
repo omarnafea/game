@@ -9,7 +9,6 @@
         <img src="<?=$logoPath?>" width="45" height="45" alt="logo" class="img-fluid"/>
     </a>
 
-    <a class="nav-link dashboard-list close" href="#"><i class="fas fa-list fa-xs"></i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

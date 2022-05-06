@@ -114,7 +114,7 @@ $type = $game['type'];
 
             <div class="form-group">
                 <label>Image</label>
-                <input  type="file"  class="form-control" name="image" id="image"   accept=".jpg , .png , .jpeg"
+                <input  type="file"  class="form-control" name="image" id="image"   accept=".jpg , .png , .jpeg, .jfif"
                     <?php if(!$update_mode) echo 'required' ?>>
 
             </div>

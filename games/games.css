@@ -18,3 +18,8 @@
     width: 80%;
     border-radius: 20px;
 }
+
+
+.stage-container img{
+    max-height : 200px !important;
+}

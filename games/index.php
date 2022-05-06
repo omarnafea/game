@@ -5,14 +5,7 @@ if(!isset($_SESSION)){
     session_start();
 }
 
-
 $games = Game::listGames($_SESSION['user_id']);
-
-//echo "<pre>";
-//print_r($games);
-//echo "</pre>";
-//die;
-
 
 ?>
 <html>
